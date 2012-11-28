@@ -1,0 +1,27 @@
+# src/Ens/JobeetBundle/Resources/config/doctrine/Affiliate.orm.yml
+Ens\JobeetBundle\Entity\Affiliate:
+    type: entity
+    table: affiliate
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        url:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+            unique: true
+        token:
+            type: string
+            length: 255
+        created_at:
+            type: datetime
+    oneToMany:
+        category_affiliates:
+            targetEntity: CategoryAffiliate
+            mappedBy: affiliate
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtValue ]

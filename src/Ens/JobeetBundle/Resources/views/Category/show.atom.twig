@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Jobeet ({{ category.name }})</title>
+  <subtitle>Latest Jobs</subtitle>
+  <link href="{{ url('ens_jobeet_category', { 'slug': category.slug, '_format': 'atom' }) }}" rel="self" />
+  <link href="{{ url('ens_jobeet_category', { 'slug': category.slug }) }}" />
+  <updated>{{ category.activejobs[0].createdAt.format(constant('DATE_ATOM')) }}</updated>
+  <author><name>Jobeet</name></author>
+  <id>{{ feedId }}</id>
+ 
+  {% for entity in category.activejobs %}
+    <entry>
+      <title>{{ entity.position }} ({{ entity.location }})</title>
+      <link href="{{ url('ens_job_show', { 'id': entity.id, 'company': entity.companyslug, 'location': entity.locationslug, 'position': entity.positionslug }) }}" />
+      <id>{{ entity.id }}</id>
+      <updated>{{ entity.createdAt.format(constant('DATE_ATOM')) }}</updated>
+      <summary type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          {% if entity.logo %}
+            <div>
+              <a href="{{ entity.url }}">
+                <img src="http://{{ app.request.host }}/uploads/jobs/{{ entity.logo }}" alt="{{ entity.company }} logo" />
+              </a>
+            </div>
+          {% endif %}
+          <div>
+            {{ entity.description|nl2br }}
+          </div>
+          <h4>How to apply?</h4>
+          <p>{{ entity.howtoapply }}</p>
+        </div>
+      </summary>
+      <author><name>{{ entity.company }}</name></author>
+    </entry>
+  {% endfor %}
+</feed>

@@ -1,0 +1,25 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
+security:
+    firewalls:
+        secured_area:
+            pattern:    ^/
+            anonymous: ~
+            form_login:
+                login_path:  /login
+                check_path:  /login_check
+            logout:
+                path:  /logout
+                target: /
+ 
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+ 
+    providers:
+        main:
+            entity: { class: Ens\JobeetBundle\Entity\User, property: username }
+ 
+    encoders:
+        Ens\JobeetBundle\Entity\User: sha512

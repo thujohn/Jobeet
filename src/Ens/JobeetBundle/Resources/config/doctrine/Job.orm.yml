@@ -1,0 +1,68 @@
+# src/Ens/JobeetBundle/Resources/config/doctrine/Job.orm.yml
+Ens\JobeetBundle\Entity\Job:
+    type: entity
+    repositoryClass: Ens\JobeetBundle\Repository\JobRepository
+    table: job
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        type:
+            type: string
+            length: 255
+            nullable: true
+        company:
+            type: string
+            length: 255
+        logo:
+            type: string
+            length: 255
+            nullable: true
+        url:
+            type: string
+            length: 255
+            nullable: true
+        position:
+            type: string
+            length: 255
+        location:
+            type: string
+            length: 255
+        description:
+            type: text
+        how_to_apply:
+            type: text
+        token:
+            type: string
+            length: 255
+            unique: true
+        is_public:
+            type: boolean
+            nullable: true
+        is_activated:
+            type: boolean
+            nullable: true
+        email:
+            type: string
+            length: 255
+        expires_at:
+            type: datetime
+        created_at:
+            type: datetime
+        updated_at:
+            type: datetime
+            nullable: true
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: jobs
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ setTokenValue, preUpload, setCreatedAtValue, setExpiresAtValue ]
+        preUpdate: [ preUpload, setUpdatedAtValue ]
+        postPersist: [ upload ]
+        postUpdate: [ upload ]
+        postRemove: [ removeUpload ]

@@ -1,0 +1,46 @@
+ens_job:
+    pattern:  /
+    defaults: { _controller: "EnsJobeetBundle:Job:index" }
+
+ens_job_show:
+    pattern:  /{company}/{location}/{id}/{position}
+    defaults: { _controller: "EnsJobeetBundle:Job:show" }
+    requirements: { id: \d+ }
+
+ens_job_preview:
+    pattern:  /{company}/{location}/{token}/{position}
+    defaults: { _controller: "EnsJobeetBundle:Job:preview" }
+    requirements: { token: \w+ }
+
+ens_job_new:
+    pattern:  /new
+    defaults: { _controller: "EnsJobeetBundle:Job:new" }
+
+ens_job_create:
+    pattern:  /create
+    defaults: { _controller: "EnsJobeetBundle:Job:create" }
+    requirements: { _method: post }
+
+ens_job_edit:
+    pattern:  /{token}/edit
+    defaults: { _controller: "EnsJobeetBundle:Job:edit" }
+
+ens_job_update:
+    pattern:  /{token}/update
+    defaults: { _controller: "EnsJobeetBundle:Job:update" }
+    requirements: { _method: post }
+
+ens_job_delete:
+    pattern:  /{token}/delete
+    defaults: { _controller: "EnsJobeetBundle:Job:delete" }
+    requirements: { _method: post }
+
+ens_job_publish:
+    pattern:  /{token}/publish
+    defaults: { _controller: "EnsJobeetBundle:Job:publish" }
+    requirements: { _method: post }
+
+ens_job_extend:
+    pattern:  /{token}/extend
+    defaults: { _controller: "EnsJobeetBundle:Job:extend" }
+    requirements: { _method: post }

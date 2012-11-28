@@ -1,0 +1,27 @@
+Ens\JobeetBundle\Entity\Category:
+    type: entity
+    repositoryClass: Ens\JobeetBundle\Repository\CategoryRepository
+    table: category
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        slug:
+            type: string
+            length: 255
+            unique: true
+    oneToMany:
+        jobs:
+            targetEntity: Job
+            mappedBy: category
+        category_affiliates:
+            targetEntity: CategoryAffiliate
+            mappedBy: category
+    lifecycleCallbacks:
+        prePersist: [ setSlugValue ]
+        preUpdate: [ setSlugValue ]

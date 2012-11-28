@@ -1,0 +1,21 @@
+# src/Ens/JobeetBundle/Resources/config/doctrine/CategoryAffiliate.orm.yml
+Ens\JobeetBundle\Entity\CategoryAffiliate:
+    type: entity
+    table: category_affiliate
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: category_affiliates
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+        affiliate:
+            targetEntity: Affiliate
+            inversedBy: category_affiliates
+            joinColumn:
+                name: affiliate_id
+                referencedColumnName: id

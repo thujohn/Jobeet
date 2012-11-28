@@ -1,0 +1,117 @@
+{% extends 'EnsJobeetBundle::layout.html.twig' %}
+ 
+{% form_theme edit_form _self %}
+ 
+{% block field_errors %}
+{% spaceless %}
+  {% if errors|length > 0 %}
+    <ul>
+      {% for error in errors %}
+        <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
+ 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/css/job.css') }}" type="text/css" media="all" />
+{% endblock %}
+ 
+{% block content %}
+  <h1>Job edit</h1>
+  <form action="{{ path('ens_job_update', { 'token': entity.token }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <table id="job_form">
+      <tfoot>
+        <tr>
+          <td colspan="2">
+            <input type="submit" value="Preview your job" />
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr>
+          <th>{{ form_label(edit_form.category) }}</th>
+          <td>
+            {{ form_errors(edit_form.category) }}
+            {{ form_widget(edit_form.category) }}
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.type) }}</th>
+          <td>
+            {{ form_errors(edit_form.type) }}
+            {{ form_widget(edit_form.type) }}
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.company) }}</th>
+          <td>
+            {{ form_errors(edit_form.company) }}
+            {{ form_widget(edit_form.company) }}
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.file) }}</th>
+          <td>
+            {{ form_errors(edit_form.file) }}
+            {{ form_widget(edit_form.file) }}
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.url) }}</th>
+          <td>
+            {{ form_errors(edit_form.url) }}
+            {{ form_widget(edit_form.url) }}
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.position) }}</th>
+          <td>
+            {{ form_errors(edit_form.position) }}
+            {{ form_widget(edit_form.position) }}
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.location) }}</th>
+          <td>
+            {{ form_errors(edit_form.location) }}
+            {{ form_widget(edit_form.location) }}
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.description) }}</th>
+          <td>
+            {{ form_errors(edit_form.description) }}
+            {{ form_widget(edit_form.description) }}
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.how_to_apply) }}</th>
+          <td>
+            {{ form_errors(edit_form.how_to_apply) }}
+            {{ form_widget(edit_form.how_to_apply) }}
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.is_public) }}</th>
+          <td>
+            {{ form_errors(edit_form.is_public) }}
+            {{ form_widget(edit_form.is_public) }}
+            <br /> Whether the job can also be published on affiliate websites or not.
+          </td>
+        </tr>
+        <tr>
+          <th>{{ form_label(edit_form.email) }}</th>
+          <td>
+            {{ form_errors(edit_form.email) }}
+            {{ form_widget(edit_form.email) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+ 
+    {{ form_rest(edit_form) }}
+  </form>
+{% endblock %}

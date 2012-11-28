@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: null
+    database_name: jobeet
+    database_user: root
+    database_password: root
+    mailer_transport: smtp
+    mailer_host: localhost
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: 093f45ea0ccaf3dffc97318dccb9af90f057d75b
+    database_path: null

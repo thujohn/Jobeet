@@ -1,0 +1,45 @@
+{% extends 'EnsJobeetBundle::layout.html.twig' %}
+ 
+{% block title %}
+    {{ entity.company }} is looking for a {{ entity.position }}
+{% endblock %}
+ 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/css/job.css') }}" type="text/css" media="all" />
+{% endblock %}
+ 
+{% block content %}
+    {% if app.request.get('token') %}
+      {% include 'EnsJobeetBundle:Job:admin.html.twig' with {'job': entity} %}
+    {% endif %}
+    <div id="job">
+      <h1>{{ entity.company }}</h1>
+      <h2>{{ entity.location }}</h2>
+      <h3>
+        {{ entity.position }}
+        <small> - {{ entity.type }}</small>
+      </h3>
+ 
+      {% if entity.logo %}
+        <div class="logo">
+          <a href="{{ entity.url }}">
+            <img src="/uploads/jobs/{{ entity.logo }}"
+              alt="{{ entity.company }} logo" />
+          </a>
+        </div>
+      {% endif %}
+ 
+      <div class="description">
+        {{ entity.description|nl2br }}
+      </div>
+ 
+      <h4>How to apply?</h4>
+ 
+      <p class="how_to_apply">{{ entity.howtoapply }}</p>
+ 
+      <div class="meta">
+        <small>posted on {{ entity.createdat|date('m/d/Y') }}</small>
+      </div>
+    </div>
+{% endblock %}
